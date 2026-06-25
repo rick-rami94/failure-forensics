@@ -38,6 +38,8 @@ class _Record:
     output_json: str
     confidence: int | None
     latency_ms: float
+    input_tokens: int | None = None
+    output_tokens: int | None = None
 
 
 class RecordingLLM:
@@ -63,6 +65,8 @@ class RecordingLLM:
             max_tokens=max_tokens,
         )
         latency_ms = (time.perf_counter() - start) * 1000.0
+        # Token usage is available on the live client; the offline mock has none.
+        usage = getattr(self._inner, "last_usage", None)
         self.records.append(
             _Record(
                 model=model,
@@ -70,6 +74,8 @@ class RecordingLLM:
                 output_json=result.model_dump_json(),
                 confidence=getattr(result, "confidence", None),
                 latency_ms=latency_ms,
+                input_tokens=getattr(usage, "input_tokens", None),
+                output_tokens=getattr(usage, "output_tokens", None),
             )
         )
         return result
@@ -86,6 +92,8 @@ def _span(
     model: str | None = None,
     prompt: str | None = None,
     confidence: int | None = None,
+    input_tokens: int | None = None,
+    output_tokens: int | None = None,
     error: str | None = None,
 ) -> Span:
     timestamp = _now()
@@ -99,6 +107,8 @@ def _span(
         step_input=step_input,
         step_output=step_output,
         confidence=confidence,
+        input_tokens=input_tokens,
+        output_tokens=output_tokens,
         latency_ms=latency_ms,
         error=error,
         started_at=timestamp,
@@ -134,6 +144,7 @@ def run_traced(
                 step_input=document.text, step_output=rec.output_json,
                 latency_ms=rec.latency_ms, model=rec.model, prompt=rec.prompt,
                 confidence=rec.confidence,
+                input_tokens=rec.input_tokens, output_tokens=rec.output_tokens,
             )
         )
 

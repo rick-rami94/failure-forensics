@@ -46,19 +46,21 @@ def run_eval(
         diag = diagnose(trace, judge_llm, threshold=threshold)
 
         if case.failing_step is None:
-            resolved = diag.category.value == "none"
+            is_resolved = diag.category.value == "none"
         else:
             quality = diag.step_quality.get(case.failing_step)
-            resolved = diag.root_cause_step != case.failing_step and (
+            is_resolved = diag.root_cause_step != case.failing_step and (
                 quality is None or quality >= threshold
             )
-        results.append(EvalResult(case_id=case.case_id, resolved=resolved, detail=diag.summary))
+        results.append(
+            EvalResult(case_id=case.case_id, resolved=is_resolved, detail=diag.summary)
+        )
 
-    resolved = sum(1 for result in results if result.resolved)
+    resolved_count = sum(1 for result in results if result.resolved)
     return EvalReport(
         total=len(results),
-        resolved=resolved,
-        unresolved=len(results) - resolved,
+        resolved=resolved_count,
+        unresolved=len(results) - resolved_count,
         results=results,
     )
 

@@ -1,5 +1,10 @@
 # Failure Forensics Tool for AI Pipelines
 
+[![CI](https://github.com/rick-rami94/failure-forensics/actions/workflows/ci.yml/badge.svg)](https://github.com/rick-rami94/failure-forensics/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/rick-rami94/failure-forensics/branch/main/graph/badge.svg)](https://codecov.io/gh/rick-rami94/failure-forensics)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+![Python](https://img.shields.io/badge/python-3.11%2B-blue)
+
 **An observability + root-cause layer for multi-step AI pipelines.** It traces every
 intermediate step of an LLM pipeline, pinpoints exactly *where* a failure originated,
 explains *how* it propagated, and turns each confirmed failure into a regression test.
