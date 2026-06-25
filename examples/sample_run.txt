@@ -1,0 +1,33 @@
+
+======================================================================
+1. Run the pipeline (traced)
+======================================================================
+trace_id: 511cbb4771a44160927c6463f4b827f8
+seeded failure modes: ['ambiguous_category']
+  [0] intake         —
+  [1] extraction     confidence 4/5
+  [2] classification confidence 3/5
+  [3] summarization  confidence 4/5
+
+======================================================================
+2. Diagnose the root cause (LLM-as-judge, scripted offline)
+======================================================================
+Root cause: 'classification' (quality 2/5, misclassification) — The document states policy requirements; it is not a risk register.
+category: misclassification
+evidence chain:
+  - classification (quality 2/5): Classified risk_register; the content is an access-control policy.
+  - summarization (quality 3/5): Summary inherits the wrong document type from classification.
+
+======================================================================
+3. Turn the confirmed failure into an eval case
+======================================================================
+case_id: 5d7a8e45b76f490596a50b5d9ad905aa
+failing_step: classification
+failure_category: misclassification
+corrected_output: {"doc_type": "policy"}
+
+======================================================================
+Done
+======================================================================
+Trace saved under ./traces/ — explore it visually with:
+  uv run streamlit run src/forensics/app/main.py
