@@ -18,8 +18,13 @@ dev = [
     "bandit>=1.7",
     "pip-audit>=2.7",
     "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "mypy>=1.11",
     "pre-commit>=3.7",
 ]
+
+[project.scripts]
+forensics = "forensics.cli:main"
 
 [build-system]
 requires = ["hatchling"]
@@ -45,3 +50,19 @@ exclude_dirs = ["tests", ".venv"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["src"]
+
+[tool.mypy]
+# 3.12 only affects how mypy parses third-party stubs (e.g. numpy); our own code
+# remains 3.11-compatible, enforced by ruff's target-version.
+python_version = "3.12"
+ignore_missing_imports = true
+follow_imports = "silent"
+plugins = ["pydantic.mypy"]
+
+[tool.coverage.run]
+source = ["forensics"]
+omit = ["*/app/main.py", "*/__main__.py"]
+
+[tool.coverage.report]
+fail_under = 85
+show_missing = true

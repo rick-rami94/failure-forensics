@@ -57,6 +57,8 @@ class AnthropicLLM:
 
     def __init__(self) -> None:
         self._client: object | None = None
+        # Usage from the most recent call, so tracing can record token counts.
+        self.last_usage: object | None = None
 
     def _ensure_client(self) -> object:
         if self._client is None:
@@ -91,6 +93,7 @@ class AnthropicLLM:
             messages=[{"role": "user", "content": wrap_document(document_text)}],
             output_format=schema,
         )
+        self.last_usage = getattr(response, "usage", None)
         return response.parsed_output
 
 
