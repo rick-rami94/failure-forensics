@@ -1,0 +1,27 @@
+# Secrets — never commit
+.env
+*.key
+*.pem
+
+# Runtime trace + eval data (may contain sensitive captured content)
+traces/
+data/eval/
+*.db
+*.sqlite
+*.sqlite3
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
