@@ -16,6 +16,9 @@ from forensics.pipeline.schemas import (
     RawDocument,
     SummaryOutput,
 )
+from forensics.rca.judge import JudgeVerdict
+
+_JUDGE_STEPS = ("extraction", "classification", "summarization")
 
 SAMPLE_TEXT = (
     "Document Type: Policy\nNext Review: 2027-01-15\n"
@@ -59,9 +62,34 @@ class ScriptedLLM:
         return self._responses[schema]
 
 
+class ScriptedJudge:
+    """A judge LLMClient that scores each step from a configured map (keyed off the
+    STEP marker in the payload), so RCA/eval logic runs with no real LLM."""
+
+    def __init__(self, qualities: dict[str, int], issues: dict[str, list[str]] | None = None):
+        self._qualities = qualities
+        self._issues = issues or {}
+
+    def parse(self, *, model, system, document_text, schema, context=None, max_tokens=4096):
+        step = next((s for s in _JUDGE_STEPS if f"STEP: {s}" in str(document_text)), "unknown")
+        return JudgeVerdict(
+            quality=self._qualities.get(step, 5),
+            issues=self._issues.get(step, []),
+            rationale=f"scored {step}",
+        )
+
+
 @pytest.fixture
 def scripted_llm() -> ScriptedLLM:
     return ScriptedLLM()
+
+
+@pytest.fixture
+def make_judge():
+    def _make(qualities, issues=None) -> ScriptedJudge:
+        return ScriptedJudge(qualities, issues)
+
+    return _make
 
 
 @pytest.fixture
