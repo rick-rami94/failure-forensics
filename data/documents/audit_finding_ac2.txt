@@ -1,0 +1,20 @@
+Document Type: Audit Finding
+Finding ID: AF-2026-014
+Organization: Northwind Logistics (fictional — sample data)
+Related Control: AC-2 (Account Management), family Access Control
+Owner: R. Mensah, Internal Audit (r.mensah@northwind.example)
+Date Identified: 2026-03-02
+Remediation Due: 2026-04-30
+
+Summary
+During testing of the Account Management control (AC-2), auditors found that 12 of 40
+sampled separated employees retained active accounts beyond the 24-hour disablement
+window required by the Logical Access Control Policy.
+
+Risk Rating: High
+Likelihood: Likely
+Impact: Major (unauthorized access to logistics scheduling systems)
+
+Recommendation
+Automate deprovisioning via the HR-to-IAM joiner/mover/leaver workflow and add a daily
+reconciliation report. Reassess control effectiveness after remediation.

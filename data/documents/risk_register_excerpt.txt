@@ -1,0 +1,22 @@
+Document Type: Risk Register
+Organization: Northwind Logistics (fictional — sample data)
+Owner: P. Lindqvist, Enterprise Risk (p.lindqvist@northwind.example)
+Last Updated: 2026-02-20
+Next Review: 2026-05-20
+
+Risk ID: R-007
+Title: Delayed account deprovisioning for separated personnel
+Control Family: Access Control (AC)
+Related Controls: AC-2, AC-6
+Inherent Risk: High
+Residual Risk: Medium
+Treatment: Mitigate — automate deprovisioning; quarterly entitlement recertification.
+Owner of Treatment: Information Security
+
+Risk ID: R-011
+Title: Insufficient audit log review
+Control Family: Audit and Accountability (AU)
+Related Controls: AU-6
+Inherent Risk: Medium
+Residual Risk: Low
+Treatment: Mitigate — weekly automated log review with alerting.

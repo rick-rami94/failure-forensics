@@ -1,0 +1,25 @@
+Document Type: Policy
+Title: Logical Access Control Policy
+Organization: Northwind Logistics (fictional — sample data)
+Owner: J. Okafor, Director of Information Security (j.okafor@northwind.example)
+Effective Date: 2026-01-15
+Next Review: 2027-01-15
+
+1. Purpose
+This policy establishes requirements for granting, reviewing, and revoking logical
+access to Northwind Logistics information systems, in support of control family
+Access Control (AC).
+
+2. Scope
+Applies to all employees, contractors, and service accounts accessing internal systems.
+
+3. Requirements
+3.1 Account Management (AC-2): Access is provisioned on a least-privilege basis and
+    approved by the system owner. Accounts are disabled within 24 hours of separation.
+3.2 Access Enforcement (AC-3): Systems enforce role-based access control.
+3.3 Least Privilege (AC-6): Administrative privileges are granted only where required
+    and reviewed quarterly.
+
+4. Review
+Account entitlements are recertified quarterly. This policy is reviewed annually.
+Residual risk after controls: Low.

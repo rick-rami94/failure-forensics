@@ -14,7 +14,7 @@ explains *how* it propagated, and turns each confirmed failure into a regression
 15-day, phased implementation plan.
 
 - [x] **Phase 0** — Secure repo foundation (CI gates, threat model, pinned deps)
-- [ ] **Phase 1** — Typed 4-step pipeline with injectable failures
+- [x] **Phase 1** — Typed 4-step pipeline with injectable failures (mock-tested offline; live run needs `ANTHROPIC_API_KEY`)
 - [ ] **Phase 2** — Tracing layer (per-step spans, self-reported confidence, redaction)
 - [ ] **Phase 3** — Root-cause analysis (backward walk + LLM-as-judge + failure taxonomy)
 - [ ] **Phase 4** — Visual trace explorer (Streamlit node graph + diff view)
