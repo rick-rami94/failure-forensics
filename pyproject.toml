@@ -9,6 +9,7 @@ authors = [{ name = "Rick Ramirez" }]
 dependencies = [
     "anthropic>=0.40",
     "pydantic>=2.7",
+    "streamlit>=1.39",
 ]
 
 [project.optional-dependencies]

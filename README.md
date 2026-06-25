@@ -17,7 +17,7 @@ explains *how* it propagated, and turns each confirmed failure into a regression
 - [x] **Phase 1** — Typed 4-step pipeline with injectable failures (mock-tested offline; live run needs `ANTHROPIC_API_KEY`)
 - [x] **Phase 2** — Tracing layer: per-step spans (input/output/prompt/confidence/latency), SQLite+JSON store, **redaction-before-persistence** (tested: no secret reaches disk), path-traversal guard
 - [x] **Phase 3** — Root-cause analysis: backward walk + LLM-as-judge (`claude-opus-4-8`) localizes the earliest quality drop, categorizes it (5-class taxonomy), and emits an evidence chain
-- [ ] **Phase 4** — Visual trace explorer (Streamlit node graph + diff view)
+- [x] **Phase 4** — Visual trace explorer: Streamlit node graph (health colour-coded), per-step diff view; pure graph/diff logic unit-tested offline (`uv run streamlit run src/forensics/app/main.py`)
 - [ ] **Phase 5** — Feedback loop (confirmed failure → eval case → trend dashboard)
 - [ ] **Phase 6** — Polish + demo
 
